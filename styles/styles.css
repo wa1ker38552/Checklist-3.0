@@ -36,10 +36,6 @@ img {
     border-radius: 3rem;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-dark);
-}
-
 .bottom-container {
     position: absolute;
     bottom: 1rem;
