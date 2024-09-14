@@ -32,7 +32,7 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--accent);
+    background: var(--text-light);
     border-radius: 3rem;
 }
 
