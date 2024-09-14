@@ -20,6 +20,24 @@ img {
     height: 100vh;
     padding: 1rem;
     box-sizing: border-box;
+    overflow-y: auto
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dark);
 }
 
 .bottom-container {
