@@ -128,7 +128,7 @@ function createItem() {
         animateToast("#failToast", "Invalid name length")
     } else {
         let itemData = gdb("upcomingData")
-        let star = dquery(".star-icon")
+        let star = dquery("#oStar")
         let tags = []
 
         let tagElements = dquery("#itemCreateTagContainer").children
@@ -198,7 +198,7 @@ function renderTask(task) {
         }
     })
     const buttonRow = dcreate("div", "centered-vertically item-actions")
-    const b1 = dcreate("button")
+    const b1 = dcreate("button", "check-task")
     const i1 = dcreate("img")
     const b2 = dcreate("button")
     const i2 = dcreate("img")
@@ -265,7 +265,7 @@ function renderTask(task) {
 
     const subTaskContainer = dcreate("div", "sub-task-container")
     for (sub in task.subTasks) {
-        subTaskContainer.append(renderSubTask(task.id, task.subTasks[sub]))
+        subTaskContainer.append(renderSubTask(task.id, task.subTasks[sub], task.important))
     }
 
     buttonRow.append(b1, b2, b3, b4)
@@ -274,8 +274,8 @@ function renderTask(task) {
     return parent
 }
 
-function renderSubTask(id, task) {
-    const e = dcreate("div", "centered-vertically sub-task")
+function renderSubTask(id, task, important) {
+    const e = dcreate("div", `centered-vertically sub-task${(important) ? " sub-task-important": ""}`)
     const textContainer = dcreate("div")
     const title = dcreate("h3", "", task.name)
     const check = dcreate("input", "sub-check")

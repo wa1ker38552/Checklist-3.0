@@ -75,6 +75,7 @@ img {
     border-style: solid;
     border-color: var(--secondary);
     border-width: 1px;
+    gap: 0.5rem;
 }
 
 .task-parent {
@@ -110,7 +111,7 @@ img {
     gap: 1rem;
 }
 
-.item-actions button {
+.item-actions button, .check-task {
     width: 1.2rem;
     height: 1.2rem;
     background: transparent;
@@ -120,7 +121,7 @@ img {
     position: relative;
 }
 
-.item-actions button img {
+.item-actions button img, .check-task img {
     filter: invert(37%) sepia(0%) saturate(3%) hue-rotate(77deg) brightness(99%) contrast(90%);
 }
 
@@ -290,6 +291,7 @@ input[type="color"]::-webkit-color-swatch {
     box-sizing: border-box;
     background: var(--secondary);
     position: relative;
+    border: solid 1px transparent;
 }
 
 .sub-task h3 {
@@ -312,4 +314,9 @@ input[type="color"]::-webkit-color-swatch {
 
 .sub-check:checked {
     background-color: var(--accent-light);
+}
+
+.sub-task-important {
+    border-color: gold;
+    background: rgb(255, 250, 222);
 }
