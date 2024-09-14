@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Checklist</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
+        <link rel="stylesheet" href="https://lib.cadenchau.com/lib.css">
+        <link rel="stylesheet" href="styles/globals.css">
+        <link rel="stylesheet" href="styles/styles.css">
+        <script src="https://lib.cadenchau.com/lib.js"></script>
+        <script src="scripts/script.js"></script>
+    </head>
+    <body class="centered-children">
+        <div id="successToast" class="toast toast-success"></div>
+        <div id="failToast" class="toast toast-fail"></div>
+        <div class="modal-background centered-children" id="editSubTaskModal" style="display: none">
+            <div class="modal">
+                <h2>Edit Sub-task</h2>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Name</div>
+                    <input id="editSubTaskName" type="text" autocomplete="off" spellcheck="false" onfocus="this.select();">
+                    <div class="input-length-indicator"><span id="editSubTaskNameIndicator">0</span>/70</div>
+                </div>
+                <div class="break"></div>
+                <div class="centered-vertically" style="gap: 0.5rem">
+                    <button class="button" onclick="editSubTask()">Save</button>
+                    <button class="button secondary-button" onclick="animateCloseModal(dquery('#editSubTaskModal'))">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-background centered-children" id="createSubTaskModal" style="display: none">
+            <div class="modal">
+                <h2>Create Sub-task</h2>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Name</div>
+                    <input id="createSubTaskName" type="text" autocomplete="off" spellcheck="false" onfocus="this.select();">
+                    <div class="input-length-indicator"><span id="createSubTaskNameIndicator">0</span>/70</div>
+                </div>
+                <div class="break"></div>
+                <div class="centered-vertically" style="gap: 0.5rem">
+                    <button class="button" onclick="createSubTask()">Create</button>
+                    <button class="button secondary-button" onclick="animateCloseModal(dquery('#createSubTaskModal'))">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-background centered-children" id="editItemModal" style="display: none">
+            <div class="modal">
+                <img class="star-icon" src="assets/icon_star.png" onclick="(this.src.includes('icon_star.png')?this.src='assets/icon_star_filled.png':this.src='assets/icon_star.png')">
+                <h2>Edit Item</h2>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Name</div>
+                    <input id="editItemName" type="text" autocomplete="off" spellcheck="false" onfocus="this.select();">
+                    <div class="input-length-indicator"><span id="editItemNameIndicator">0</span>/70</div>
+                </div>
+                <div class="break"></div>
+                <div class="gap"></div>
+                <div class="input-container">
+                    <div class="input-label">Tags</div>
+                    <div class="tags-container" id="editItemCreateTagContainer"></div>
+                </div>
+                <div class="break"></div>
+                <div class="centered-vertically" style="gap: 0.5rem">
+                    <button class="button" onclick="editItem()">Save</button>
+                    <button class="button secondary-button" onclick="animateCloseModal(dquery('#editItemModal'))">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-background centered-children" id="itemModal" style="display: none">
+            <div class="modal">
+                <img class="star-icon" src="assets/icon_star.png" onclick="(this.src.includes('icon_star.png')?this.src='assets/icon_star_filled.png':this.src='assets/icon_star.png')">
+                <h2>Create Task</h2>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Name</div>
+                    <input id="itemName" type="text" autocomplete="off" spellcheck="false" onfocus="this.select();">
+                    <div class="input-length-indicator"><span id="itemNameIndicator">0</span>/70</div>
+                </div>
+                <div class="break"></div>
+                <div class="gap"></div>
+                <div class="input-container">
+                    <div class="input-label">Tags</div>
+                    <div class="tags-container" id="itemCreateTagContainer"></div>
+                </div>
+                <div class="break"></div>
+                <div class="centered-vertically" style="gap: 0.5rem">
+                    <button class="button" onclick="createItem()">Create</button>
+                    <button class="button secondary-button" onclick="animateCloseModal(dquery('#itemModal'))">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-background centered-children" id="tagModal" style="display: none">
+            <div class="modal">
+                <h2>Create Tag</h2>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Name</div>
+                    <input id="tagName" type="text" autocomplete="off" spellcheck="false" onfocus="this.select();">
+                    <div class="input-length-indicator"><span id="tagNameIndicator">0</span>/50</div>
+                </div>
+                <div class="break"></div>
+                <div class="gap"></div>
+                <div class="input-container">
+                    <div class="input-label">Color</div>
+                    <div class="tags-container" style="display: grid; grid-gap: 0.5rem">
+                        <div class="centered-vertically" style="gap: 0.5rem">
+                            <input id="colorInput" type="color" value="#f3f3f3">
+                            <div id="colorIndicator">#f3f3f3</div>
+                        </div>
+                        <div class="centered-vertically" style="gap: 0.5rem">
+                            <input id="secondaryColorInput" type="color" value="#cecece">
+                            <div id="secondaryColorIndicator">#cecece</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Preview</div>
+                    <div class="tags-container">
+                        <div class="tag" id="previewTag">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="break"></div>
+                <div class="input-container">
+                    <div class="input-label">Existing Tags</div>
+                    <div class="tags-container" id="tagsCreateTagContainer"></div>
+                </div>
+                <div class="break"></div>
+                <div class="centered-vertically" style="gap: 0.5rem">
+                    <button class="button" onclick="createTag()">Create</button>
+                    <button class="button secondary-button" onclick="animateCloseModal(dquery('#tagModal'))">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper"></div>
+        <div class="bottom-container">
+            <div class="button-action-container" style="display: none">
+                <button class="add-button secondary-button" onclick="refreshTags('#itemCreateTagContainer', false); animateOpenModal(dquery('#itemModal'))"><img src="assets/icon_add.png"></button>
+                <button class="add-button secondary-button" onclick="refreshTags('#tagsCreateTagContainer', true); animateOpenModal(dquery('#tagModal'))"><img src="assets/icon_tag.png"></button>
+            </div>
+            <button class="add-button" onclick="const e=dquery('.button-action-container');if(e.style.display=='none'){e.style.display='grid';e.offsetHeight;e.style.opacity='1';}else{setTimeout(function(){e.style.display='none'}, 300);e.style.opacity='0';}">
+                <img src="assets/icon_add.png">
+            </button>
+        </div>
+    </body>
+</html>
